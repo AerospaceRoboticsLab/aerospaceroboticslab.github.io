@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Aerospace Robotics Lab — Georgia Tech</title>
+<meta name="description" content="The Aerospace Robotics Lab at Georgia Tech develops autonomy for space systems, robotics, and nonlinear control in uncertain and extreme environments." />
+<link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap nav">
+    <a class="brand" href="index.html">
+      <span class="mark"><b>ARL</b></span>
+      <span class="txt"><b>Aerospace Robotics Lab</b><span>Georgia Tech</span></span>
+    </a>
+    <button class="nav-toggle" aria-label="Menu" onclick="document.getElementById('nav').classList.toggle('open')">☰</button>
+    <nav class="nav-links" id="nav">
+      <a href="index.html" class="active">Home</a>
+      <a href="research.html">Research</a>
+      <a href="team.html">Team</a>
+      <a href="publications.html">Publications</a>
+      <a href="teaching.html">Teaching</a>
+      <a href="blog.html">Blog</a>
+      <a href="contact.html">Contact</a>
+      <a href="https://aerospaceroboticslab.ae.gatech.edu/" target="_blank" rel="noopener">Lab Site ↗</a>
+    </nav>
+  </div>
+</header>
+
+<div class="notice">
+  <div class="wrap">
+    <span class="pill">Openings</span>
+    <span>We are recruiting motivated students interested in autonomy, control, and robotics for extreme environments. <a href="contact.html">Prospective students →</a></span>
+  </div>
+</div>
+
+<!-- 1. HERO -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="wrap">
+    <span class="label">Space Systems · Autonomy · Robotics · Nonlinear Control</span>
+    <h1>Robots that explore the<br><span class="accent">Moon, orbit, and beyond</span></h1>
+    <p>We enable aerospace systems to operate autonomously — safely, intelligently, and collaboratively — in uncertain and extreme environments. Our work fuses rigorous mathematical foundations with hardware validation in the lab and the field.</p>
+    <div class="btn-row">
+      <a class="btn btn-primary" href="research.html">Explore research</a>
+      <a class="btn btn-ghost" href="team.html">Meet the team</a>
+    </div>
+    <div class="quicklinks">
+      <a href="publications.html">Publications</a>
+      <a href="https://scholar.google.com/citations?user=Bo3Uu-gAAAAJ&hl=en" target="_blank" rel="noopener">Google Scholar <span class="ext">↗</span></a>
+      <a href="https://dblp.org/pid/263/6375.html" target="_blank" rel="noopener">dblp <span class="ext">↗</span></a>
+      <a href="https://www.linkedin.com/in/nakka" target="_blank" rel="noopener">LinkedIn <span class="ext">↗</span></a>
+      <a href="https://www.youtube.com/@AerospaceRoboticsLab" target="_blank" rel="noopener">YouTube <span class="ext">↗</span></a>
+      <a href="blog.html">Blog</a>
+    </div>
+  </div>
+</section>
+
+<!-- 2. MISSION -->
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <span class="label">Mission</span>
+      <h2>Intelligent decisions under uncertainty</h2>
+      <p>At the heart of our work is one question: how can robotic systems make intelligent decisions in the face of uncertainty, while ensuring safety, robustness, and mission success? We formulate and solve information-cost stochastic optimal control problems, drawing on nonlinear control, distributional robustness, convex optimization, and probability theory.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 3. RESEARCH THRUSTS -->
+<section style="padding-top:0;">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="label">Research thrusts</span>
+      <h2>Four directions, one frontier</h2>
+    </div>
+    <div class="grid grid-2">
+      <div class="card">
+        <span class="tag">Extreme Terrain</span>
+        <h3>Multi-Modal Robotic Systems</h3>
+        <p>We design and prototype multi-modal robots that traverse highly variable environments — planetary caves, ice crevasses, steep slopes. Inspired by platforms like EELS, they combine wheeled, legged, and slithering locomotion with onboard autonomy: dynamics modeling, real-time control adaptation, and perception-informed motion planning.</p>
+      </div>
+      <div class="card">
+        <span class="tag">Decision-Making</span>
+        <h3>Safe Exploration Under Uncertainty</h3>
+        <p>We develop scalable methods for perception-driven planning and control under bounded and unbounded uncertainty, using distributionally robust optimization, uncertainty quantification, and probabilistic inference.</p>
+      </div>
+      <div class="card">
+        <span class="tag">Multi-Agent</span>
+        <h3>Collaborative Autonomy</h3>
+        <p>We study how heterogeneous teams of robots — rovers, drones, and free-flyers — reason jointly, share information, and act cooperatively under resource, communication, and safety constraints: distributed task allocation, formation planning, and multi-agent motion planning with limited observability.</p>
+      </div>
+      <div class="card">
+        <span class="tag">In-Space · ISAM</span>
+        <h3>On-Orbit Inspection &amp; Assembly</h3>
+        <p>We enable autonomous in-space assembly and reconfiguration of large structures such as antennas and trusses — multi-spacecraft coordination, contact dynamics, and uncertainty-aware manipulation for next-generation orbital construction.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. CONCEPTS IN MOTION (animations illustrating the research above) -->
+<section class="section-soft" style="background:var(--paper-2);border-top:1px solid var(--hairline);border-bottom:1px solid var(--hairline);">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="label">Concepts in motion</span>
+      <h2>The ideas behind our work, animated</h2>
+    </div>
+
+    <div class="viz-grid">
+
+      <!-- Stochastic Optimal Control -->
+      <div class="viz">
+        <span class="tag">Stochastic Optimal Control</span>
+        <h3>Chance-constrained planning</h3>
+        <svg class="stage" viewBox="0 0 360 220" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" role="img" aria-label="An agent following an optimal trajectory with a growing and shrinking uncertainty ellipse, surrounded by sampled trajectories, avoiding an obstacle.">
+          <path class="v-tube" d="M34,172 C120,64 250,54 326,80" />
+          <path class="v-sample" d="M34,172 C120,76 250,66 326,80" />
+          <path class="v-sample" d="M34,172 C120,54 250,42 326,80" style="animation-delay:-1s" />
+          <path class="v-sample" d="M34,172 C128,88 256,72 326,80" style="animation-delay:-1.8s" />
+          <path class="v-sample" d="M34,172 C112,62 244,50 326,80" style="animation-delay:-.6s" />
+          <path class="v-sample" d="M34,172 C124,48 252,70 326,80" style="animation-delay:-2.3s" />
+          <circle class="v-obst" cx="190" cy="156" r="30" />
+          <text class="v-lbl" x="190" y="159" text-anchor="middle">obstacle</text>
+          <path id="soc-mean" class="v-mean" d="M34,172 C120,64 250,54 326,80" />
+          <circle class="v-node" cx="34" cy="172" r="5" />
+          <text class="v-lbl" x="34" y="190" text-anchor="middle">start</text>
+          <circle class="v-goal" cx="326" cy="80" r="7" />
+          <text class="v-lbl" x="326" y="62" text-anchor="middle">goal</text>
+          <g>
+            <animateMotion dur="4.5s" repeatCount="indefinite" calcMode="linear"><mpath xlink:href="#soc-mean" /></animateMotion>
+            <ellipse class="v-ell" rx="11" ry="7">
+              <animate attributeName="rx" values="7;18;9;7" dur="4.5s" repeatCount="indefinite" />
+              <animate attributeName="ry" values="5;11;6;5" dur="4.5s" repeatCount="indefinite" />
+            </ellipse>
+            <circle class="v-node" r="4" />
+          </g>
+        </svg>
+        <p class="cap">An agent tracks the optimal path while a bounded uncertainty ellipse grows and shrinks; sampled trajectories stay inside a corridor that keeps the obstacle clear with high probability.</p>
+      </div>
+
+      <!-- Multi-Agent Autonomy -->
+      <div class="viz">
+        <span class="tag">Multi-Agent Autonomy</span>
+        <h3>Coordinated sensing</h3>
+        <svg class="stage" viewBox="0 0 360 220" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" role="img" aria-label="Three agents traveling on passive relative orbits around a central target, with expanding coordination pulses.">
+          <circle class="v-pulse" cx="180" cy="110" r="6">
+            <animate attributeName="r" values="8;150" dur="3.4s" repeatCount="indefinite" />
+            <animate attributeName="opacity" values=".55;0" dur="3.4s" repeatCount="indefinite" />
+          </circle>
+          <circle class="v-pulse" cx="180" cy="110" r="6">
+            <animate attributeName="r" values="8;150" dur="3.4s" begin="1.7s" repeatCount="indefinite" />
+            <animate attributeName="opacity" values=".55;0" dur="3.4s" begin="1.7s" repeatCount="indefinite" />
+          </circle>
+          <circle class="v-orbit" cx="180" cy="110" r="13" />
+          <circle class="v-target" cx="180" cy="110" r="6" />
+          <text class="v-lbl" x="180" y="138" text-anchor="middle">target</text>
+          <g transform="rotate(0 180 110)">
+            <path id="orb1" class="v-orbit" d="M60,110 a120,46 0 1,0 240,0 a120,46 0 1,0 -240,0" />
+            <g><animateMotion dur="6s" repeatCount="indefinite" rotate="auto"><mpath xlink:href="#orb1" /></animateMotion><circle class="v-agent" r="5" /></g>
+          </g>
+          <g transform="rotate(60 180 110)">
+            <path id="orb2" class="v-orbit" d="M70,110 a110,40 0 1,0 220,0 a110,40 0 1,0 -220,0" />
+            <g><animateMotion dur="7.5s" repeatCount="indefinite" rotate="auto"><mpath xlink:href="#orb2" /></animateMotion><circle class="v-agent" r="5" /></g>
+          </g>
+          <g transform="rotate(-58 180 110)">
+            <path id="orb3" class="v-orbit" d="M64,110 a116,52 0 1,0 232,0 a116,52 0 1,0 -232,0" />
+            <g><animateMotion dur="5.4s" repeatCount="indefinite" rotate="auto"><mpath xlink:href="#orb3" /></animateMotion><circle class="v-agent" r="5" /></g>
+          </g>
+        </svg>
+        <p class="cap">Three observer agents follow stable passive relative orbits around a target, sharing information to jointly inspect it under fuel and communication constraints.</p>
+      </div>
+
+      <!-- Rovers on the Moon -->
+      <div class="viz">
+        <span class="tag">Lunar Exploration</span>
+        <h3>Rovers on the Moon</h3>
+        <svg class="stage" viewBox="0 0 360 220" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" role="img" aria-label="Two rovers driving across the lunar surface, leaving wheel tracks, with Earth in the sky.">
+          <circle class="v-target" cx="44" cy="38" r="1.5" />
+          <circle class="v-target" cx="120" cy="26" r="1.5" />
+          <circle class="v-target" cx="200" cy="42" r="1.5" />
+          <circle class="v-target" cx="262" cy="30" r="1.5" />
+          <circle class="v-orbit" cx="300" cy="50" r="17" />
+          <path class="v-obst" d="M300,33 a17,17 0 0,1 0,34 a12,17 0 0,0 0,-34 Z" />
+          <text class="v-lbl" x="300" y="82" text-anchor="middle">Earth</text>
+          <path class="v-obst" d="M-20,172 C60,154 110,154 170,164 C230,174 290,154 380,164 L380,232 L-20,232 Z" />
+          <ellipse class="v-orbit" cx="95" cy="170" rx="15" ry="4" />
+          <ellipse class="v-orbit" cx="250" cy="164" rx="20" ry="5" />
+          <path id="lunar" class="v-sample" d="M-30,162 C40,154 95,154 160,162 C220,169 285,156 390,162" />
+          <g>
+            <animateMotion dur="11s" repeatCount="indefinite" rotate="auto"><mpath xlink:href="#lunar" /></animateMotion>
+            <g>
+              <circle class="v-node" cx="-7" cy="0" r="3.2" />
+              <circle class="v-node" cx="7" cy="0" r="3.2" />
+              <rect class="v-agent" x="-11" y="-9" width="22" height="8" rx="2" />
+              <rect class="v-agent" x="-3" y="-15" width="9" height="6" rx="1" />
+              <line class="v-wire" x1="7" y1="-9" x2="11" y2="-20" />
+              <circle class="v-node" cx="11" cy="-20" r="1.6" />
+            </g>
+          </g>
+          <g>
+            <animateMotion dur="14s" begin="-6s" repeatCount="indefinite" rotate="auto"><mpath xlink:href="#lunar" /></animateMotion>
+            <g transform="scale(.8)">
+              <circle class="v-node" cx="-7" cy="0" r="3.2" />
+              <circle class="v-node" cx="7" cy="0" r="3.2" />
+              <rect class="v-agent" x="-11" y="-9" width="22" height="8" rx="2" />
+              <rect class="v-agent" x="-3" y="-15" width="9" height="6" rx="1" />
+              <line class="v-wire" x1="7" y1="-9" x2="11" y2="-20" />
+              <circle class="v-node" cx="11" cy="-20" r="1.6" />
+            </g>
+          </g>
+        </svg>
+        <p class="cap">Autonomous rovers traverse uncertain lunar terrain, leaving tracks as they map the surface and search for resources ahead of crewed missions.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- 5. DIRECTOR -->
+<section>
+  <div class="wrap">
+    <div class="card" style="padding:36px;">
+      <div class="pi">
+        <div class="frame">
+          <img src="https://aerospaceroboticslab.ae.gatech.edu/files/2024/08/Yashwanth_Nakka-862x1024.jpeg" alt="Dr. Yashwanth Nakka" />
+        </div>
+        <div>
+          <span class="label">Director / Principal Investigator</span>
+          <h3>Dr. Yashwanth Nakka</h3>
+          <p class="role">Assistant Professor · Daniel Guggenheim School of Aerospace Engineering</p>
+          <p style="color:var(--text-dim);">Dr. Nakka leads the Aerospace Robotics Lab at Georgia Tech. His long-term vision is to enable trustworthy, adaptive, and resilient robotic systems that serve as partners in exploration, science, and infrastructure development in the most challenging environments known to humanity.</p>
+          <p style="margin-top:18px;"><a class="btn btn-ghost" href="team.html" style="padding:10px 20px;font-size:14px;">View full team →</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div>
+      <div class="lab">Aerospace Robotics Lab</div>
+      <div class="sub">Guggenheim School of Aerospace Engineering · Georgia Tech</div>
+      <div class="sub"><a href="https://aerospaceroboticslab.ae.gatech.edu/" target="_blank" rel="noopener">aerospaceroboticslab.ae.gatech.edu ↗</a> · <a href="https://www.youtube.com/@AerospaceRoboticsLab" target="_blank" rel="noopener">YouTube ↗</a></div>
+    </div>
+    <div class="right">© <span id="yr"></span> · ARL @ GT</div>
+  </div>
+</footer>
+<script>document.getElementById('yr').textContent=new Date().getFullYear();</script>
+</body>
+</html>

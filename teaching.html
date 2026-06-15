@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Teaching — Aerospace Robotics Lab</title>
+<meta name="description" content="Courses taught by Dr. Yashwanth Nakka at Georgia Tech." />
+<link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap nav">
+    <a class="brand" href="index.html">
+      <span class="mark"><b>ARL</b></span>
+      <span class="txt"><b>Aerospace Robotics Lab</b><span>Georgia Tech</span></span>
+    </a>
+    <button class="nav-toggle" aria-label="Menu" onclick="document.getElementById('nav').classList.toggle('open')">☰</button>
+    <nav class="nav-links" id="nav">
+      <a href="index.html">Home</a>
+      <a href="research.html">Research</a>
+      <a href="team.html">Team</a>
+      <a href="publications.html">Publications</a>
+      <a href="teaching.html" class="active">Teaching</a>
+      <a href="blog.html">Blog</a>
+      <a href="contact.html">Contact</a>
+      <a href="https://aerospaceroboticslab.ae.gatech.edu/" target="_blank" rel="noopener">Lab Site ↗</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap page-title">
+  <span class="label">Teaching</span>
+  <h1>Courses</h1>
+  <p>Courses taught by Dr. Nakka in the Daniel Guggenheim School of Aerospace Engineering at Georgia Tech.</p>
+</div>
+
+<section style="padding-top:44px;">
+  <div class="wrap">
+    <div class="grid grid-2">
+      <div class="card">
+        <span class="tag">Undergraduate · Capstone</span>
+        <h3>AE 4321 — Space Systems Design I</h3>
+        <p>First semester of the space systems capstone design sequence, covering mission formulation, requirements, and preliminary spacecraft design.</p>
+        <p class="partner">Offered: Fall 2024 · Fall 2025</p>
+      </div>
+      <div class="card">
+        <span class="tag">Undergraduate · Capstone</span>
+        <h3>AE 4322 — Space Systems Design II</h3>
+        <p>Second semester of the capstone sequence, advancing from preliminary design to detailed design, analysis, and integration of a complete space system.</p>
+        <p class="partner">Offered: Spring 2025</p>
+      </div>
+    </div>
+    <p style="margin-top:28px;color:var(--text-dim);">Full course descriptions are available in the <a href="https://catalog.gatech.edu/" target="_blank" rel="noopener">Georgia Tech Course Catalog ↗</a>.</p>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div>
+      <div class="lab">Aerospace Robotics Lab</div>
+      <div class="sub">Guggenheim School of Aerospace Engineering · Georgia Tech</div>
+      <div class="sub"><a href="https://aerospaceroboticslab.ae.gatech.edu/" target="_blank" rel="noopener">aerospaceroboticslab.ae.gatech.edu ↗</a> · <a href="https://www.youtube.com/@AerospaceRoboticsLab" target="_blank" rel="noopener">YouTube ↗</a></div>
+    </div>
+    <div class="right">© <span id="yr"></span> · ARL @ GT</div>
+  </div>
+</footer>
+<script>document.getElementById('yr').textContent=new Date().getFullYear();</script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Research — Aerospace Robotics Lab</title>
+<meta name="description" content="Research projects of the Aerospace Robotics Lab at Georgia Tech: multi-agent autonomy, multi-modal mobility, introspective control, on-orbit inspection, and chance-constrained trajectory optimization." />
+<link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap nav">
+    <a class="brand" href="index.html">
+      <span class="mark"><b>ARL</b></span>
+      <span class="txt"><b>Aerospace Robotics Lab</b><span>Georgia Tech</span></span>
+    </a>
+    <button class="nav-toggle" aria-label="Menu" onclick="document.getElementById('nav').classList.toggle('open')">☰</button>
+    <nav class="nav-links" id="nav">
+      <a href="index.html">Home</a>
+      <a href="research.html" class="active">Research</a>
+      <a href="team.html">Team</a>
+      <a href="publications.html">Publications</a>
+      <a href="teaching.html">Teaching</a>
+      <a href="blog.html">Blog</a>
+      <a href="contact.html">Contact</a>
+      <a href="https://aerospaceroboticslab.ae.gatech.edu/" target="_blank" rel="noopener">Lab Site ↗</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap page-title">
+  <span class="label">Research</span>
+  <h1>Active programs &amp; projects</h1>
+  <p>We combine rigorous mathematical foundations with hardware validation in laboratory and field environments, advancing the frontier of autonomy in space exploration.</p>
+</div>
+
+<section>
+  <div class="wrap">
+    <div class="grid grid-2">
+
+      <div class="card">
+        <span class="tag">Multi-Agent Autonomy</span>
+        <h3>Coordinated Formation Sensing</h3>
+        <p>CADRE (Cooperative Autonomous Distributed Robotic Exploration) is a lunar technology demonstration of multi-agent autonomy on a team of three rovers and a base station. Receiving only high-level tasks from Earth, the rovers autonomously explore a region of the lunar surface and perform a distributed measurement in coordination with a multi-static ground-penetrating radar.</p>
+      </div>
+
+      <div class="card">
+        <span class="tag">Multi-Modal Mobility</span>
+        <h3>EELS — Exobiology Extant Life Surveyor</h3>
+        <p>Ice worlds are at the forefront of astrobiological interest because of evidence of subsurface oceans. To sample Enceladus' vent systems, NASA JPL is developing a snake-like robot, EELS, that navigates extreme surfaces and descends erupting vents to capture unaltered liquid samples — potentially reaching the ocean. We contribute dynamics modeling and resilient autonomy for such platforms.</p>
+      </div>
+
+      <div class="card">
+        <span class="tag">Introspective Control</span>
+        <h3>Learning-Enabled Introspective Neural Control</h3>
+        <p>The DARPA Learning Introspective Control (LINC) program develops machine-learning-based introspection that enables physical systems — ground vehicles, ships, drone swarms, robots — to respond to events not predicted at design time. LINC updates control laws in real time while providing guidance and situational awareness to the operator, human or autonomous.</p>
+      </div>
+
+      <div class="card">
+        <span class="tag">On-Orbit · ISAM</span>
+        <h3>Collaborative On-Orbit Inspection</h3>
+        <p>Inspection and mapping of a target spacecraft in low Earth orbit using multiple observer spacecraft in stable passive relative orbits is a key enabling technology for future missions. Our guidance and control architecture uses an information-gain approach to directly trade off gathered data against fuel and energy cost.</p>
+      </div>
+
+      <div class="card" style="grid-column:1 / -1;">
+        <span class="tag">Stochastic Optimal Control</span>
+        <h3>Trajectory Optimization of Chance-Constrained Nonlinear Stochastic Systems</h3>
+        <p>We developed generalized polynomial chaos-based sequential convex programming (gPC-SCP) to compute suboptimal solutions for continuous-time chance-constrained stochastic nonlinear optimal control problems, enabling motion planning under uncertainty. The method first derives a deterministic surrogate with convex constraints via gPC expansion and a distributionally robust convex subset of the chance constraints, then solves it using sequential convex programming for trajectory generation and control.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div>
+      <div class="lab">Aerospace Robotics Lab</div>
+      <div class="sub">Guggenheim School of Aerospace Engineering · Georgia Tech</div>
+      <div class="sub"><a href="https://aerospaceroboticslab.ae.gatech.edu/" target="_blank" rel="noopener">aerospaceroboticslab.ae.gatech.edu ↗</a> · <a href="https://www.youtube.com/@AerospaceRoboticsLab" target="_blank" rel="noopener">YouTube ↗</a></div>
+    </div>
+    <div class="right">© <span id="yr"></span> · ARL @ GT</div>
+  </div>
+</footer>
+<script>document.getElementById('yr').textContent=new Date().getFullYear();</script>
+</body>
+</html>

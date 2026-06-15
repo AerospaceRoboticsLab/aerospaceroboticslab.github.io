@@ -1,0 +1,14 @@
+# Manually-specified sources, merged with works pulled from ORCID by the cite workflow.
+# Add a DOI here to include or annotate a specific paper (image, buttons, tags, etc.).
+
+- id: doi:10.1126/scirobotics.adh8332
+  type: paper
+  tags:
+    - multi-modal mobility
+    - autonomy
+
+- id: doi:10.1109/TRO.2022.3197072
+  type: paper
+  tags:
+    - stochastic optimal control
+    - motion planning

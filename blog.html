@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Blog — Aerospace Robotics Lab</title>
+<meta name="description" content="Notes, tutorials, and updates from the Aerospace Robotics Lab at Georgia Tech." />
+<link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap nav">
+    <a class="brand" href="index.html">
+      <span class="mark"><b>ARL</b></span>
+      <span class="txt"><b>Aerospace Robotics Lab</b><span>Georgia Tech</span></span>
+    </a>
+    <button class="nav-toggle" aria-label="Menu" onclick="document.getElementById('nav').classList.toggle('open')">☰</button>
+    <nav class="nav-links" id="nav">
+      <a href="index.html">Home</a>
+      <a href="research.html">Research</a>
+      <a href="team.html">Team</a>
+      <a href="publications.html">Publications</a>
+      <a href="teaching.html">Teaching</a>
+      <a href="blog.html" class="active">Blog</a>
+      <a href="contact.html">Contact</a>
+      <a href="https://aerospaceroboticslab.ae.gatech.edu/" target="_blank" rel="noopener">Lab Site ↗</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap page-title">
+  <span class="label">Blog</span>
+  <h1>Notes &amp; tutorials</h1>
+  <p>Technical write-ups, tutorials, and updates from the lab.</p>
+</div>
+
+<section style="padding-top:36px;">
+  <div class="wrap">
+    <div class="postlist">
+
+      <div class="post-entry">
+        <div class="meta">September 20, 2024 · Tutorial</div>
+        <h3><a href="https://aerospaceroboticslab.ae.gatech.edu/2024/09/20/example-clf-cbf-for-differential-drive-robot/" target="_blank" rel="noopener">Example: CLF–CBF for a Differential-Drive Robot</a></h3>
+        <p>A worked example presenting the mathematical formulation of control Lyapunov and control barrier functions applied to a differential-drive robot.</p>
+        <a class="more" href="https://aerospaceroboticslab.ae.gatech.edu/2024/09/20/example-clf-cbf-for-differential-drive-robot/" target="_blank" rel="noopener">Read more →</a>
+      </div>
+
+      <div class="post-entry">
+        <div class="meta">September 20, 2024 · Primer</div>
+        <h3><a href="https://aerospaceroboticslab.ae.gatech.edu/2024/09/20/what-is-space-robotics/" target="_blank" rel="noopener">What is Space Robotics?</a></h3>
+        <p>An introduction to space robotics — the sub-field focused on developing robotic systems capable of operating in space and on planetary surfaces.</p>
+        <a class="more" href="https://aerospaceroboticslab.ae.gatech.edu/2024/09/20/what-is-space-robotics/" target="_blank" rel="noopener">Read more →</a>
+      </div>
+
+    </div>
+
+    <p style="margin-top:28px;color:var(--text-dim);">All posts are available on the <a href="https://aerospaceroboticslab.ae.gatech.edu/blog/" target="_blank" rel="noopener">lab blog ↗</a>.</p>
+  </div>
+</section>
+
+<section class="section-soft" style="background:var(--paper-2);border-top:1px solid var(--hairline);border-bottom:1px solid var(--hairline);">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="label">In the news</span>
+      <h2 style="margin-bottom:0;">Press &amp; highlights</h2>
+    </div>
+    <div class="news">
+      <a class="item" href="https://research.gatech.edu/aerospace-robotics-lab-simulates-moon-advance-nextgen-space-robotics-research" target="_blank" rel="noopener">
+        <div class="date">Feb 2026</div>
+        <div class="t">Aerospace Robotics Lab simulates the Moon to advance next-gen space robotics research
+          <span class="src">Georgia Tech Research News</span></div>
+      </a>
+      <a class="item" href="https://www.cbsnews.com/atlanta/news/georgia-tech-students-build-moon-like-lab-to-test-robots-for-future-missions/" target="_blank" rel="noopener">
+        <div class="date">2026</div>
+        <div class="t">Georgia Tech students build a moon-like lab to test robots for future missions
+          <span class="src">CBS News</span></div>
+      </a>
+      <a class="item" href="https://coe.gatech.edu/magazine/2026/spring/behind-lab-doors" target="_blank" rel="noopener">
+        <div class="date">Spring 2026</div>
+        <div class="t">Behind the Lab Doors — inside Georgia Tech's lunar analog testbed
+          <span class="src">GT College of Engineering Magazine</span></div>
+      </a>
+      <a class="item" href="publications.html">
+        <div class="date">2026</div>
+        <div class="t">New preprints on safety-critical MPC and convex stochastic optimal control
+          <span class="src">See publications →</span></div>
+      </a>
+      <a class="item" href="https://doi.org/10.1126/scirobotics.adh8332" target="_blank" rel="noopener">
+        <div class="date">2024</div>
+        <div class="t">EELS ice-world exploration work published in Science Robotics
+          <span class="src">Science Robotics</span></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div>
+      <div class="lab">Aerospace Robotics Lab</div>
+      <div class="sub">Guggenheim School of Aerospace Engineering · Georgia Tech</div>
+      <div class="sub"><a href="https://aerospaceroboticslab.ae.gatech.edu/" target="_blank" rel="noopener">aerospaceroboticslab.ae.gatech.edu ↗</a> · <a href="https://www.youtube.com/@AerospaceRoboticsLab" target="_blank" rel="noopener">YouTube ↗</a></div>
+    </div>
+    <div class="right">© <span id="yr"></span> · ARL @ GT</div>
+  </div>
+</footer>
+<script>document.getElementById('yr').textContent=new Date().getFullYear();</script>
+</body>
+</html>
