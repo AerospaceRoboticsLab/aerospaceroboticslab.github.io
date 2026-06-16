@@ -62,6 +62,15 @@ bundle exec jekyll serve
 
 ## Deploy (GitHub Pages)
 
-1. Push this folder to a GitHub repo.
-2. Settings → Pages → Build and deployment → Source → **GitHub Actions**.
-3. The template's workflow builds and deploys automatically on each push.
+IMPORTANT: the contents of this folder must be at the **repository root** — not
+inside a subfolder. `.github/`, `_config.yaml`, and `index.md` must be top-level
+in the repo, or GitHub's default build runs instead and fails.
+
+1. Commit and push these files to the `main` branch of your repo.
+2. Settings → Actions → General → allow workflows to run (if prompted).
+3. The `on-push` workflow builds the site and pushes the result to a
+   **`gh-pages`** branch (first run takes a couple of minutes).
+4. Settings → Pages → Build and deployment → Source → **Deploy from a branch**,
+   Branch → **`gh-pages`** → **/ (root)** → Save.
+5. The site goes live at your Pages URL — for this repo name,
+   `https://aerospaceroboticslab.github.io/`.
