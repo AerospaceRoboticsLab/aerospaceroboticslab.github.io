@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>News — Aerospace Robotics Lab</title>
+<meta name="description" content="News, awards, and press coverage from the Aerospace Robotics Lab at Georgia Tech." />
+<link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap nav">
+    <a class="brand" href="index.html">
+      <span class="mark"><b>ARL</b></span>
+      <span class="txt"><b>Aerospace Robotics Lab</b><span>Georgia Tech</span></span>
+    </a>
+    <button class="nav-toggle" aria-label="Menu" onclick="document.getElementById('nav').classList.toggle('open')">☰</button>
+    <nav class="nav-links" id="nav">
+      <a href="index.html">Home</a>
+      <a href="research.html">Research</a>
+      <a href="team.html">Team</a>
+      <a href="publications.html">Publications</a>
+      <a href="teaching.html">Teaching</a>
+      <a href="blog.html">Blog</a>
+      <a href="news.html" class="active">News</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap page-title">
+  <span class="label">News</span>
+  <h1>News &amp; press</h1>
+  <p>Awards, milestones, and media coverage from the Aerospace Robotics Lab.</p>
+</div>
+
+<section style="padding-top:36px;">
+  <div class="wrap">
+
+    <div class="subhead">Awards &amp; Honors</div>
+    <div class="news">
+      <a class="item" href="https://www.jpl.nasa.gov/missions/cadre/" target="_blank" rel="noopener">
+        <div class="date">2025</div>
+        <div class="t">NASA JPL CADRE Team Award — Dr. Nakka, for contributions to multi-agent autonomy on the CADRE lunar technology demonstration
+          <span class="src">NASA Jet Propulsion Laboratory</span></div>
+      </a>
+      <a class="item" href="publications.html">
+        <div class="date">2025</div>
+        <div class="t">Best Paper Award — GROVER: a variable-height grouser wheel for enhanced terrain adaptability
+          <span class="src">RSS Workshop on Space Robotics</span></div>
+      </a>
+      <a class="item" href="https://doi.org/10.1126/scirobotics.adh8332" target="_blank" rel="noopener">
+        <div class="date">2024</div>
+        <div class="t">NASA JPL EELS Team Award — Dr. Nakka, for contributions to the EELS ice-world exploration robot
+          <span class="src">NASA Jet Propulsion Laboratory</span></div>
+      </a>
+    </div>
+
+    <div class="subhead">2026</div>
+    <div class="news">
+      <a class="item" href="https://coe.gatech.edu/magazine/2026/spring/behind-lab-doors" target="_blank" rel="noopener">
+        <div class="date">Spring 2026</div>
+        <div class="t">Behind the Lab Doors — Dr. Nakka featured on the cover of the Georgia Tech College of Engineering magazine
+          <span class="src">GT College of Engineering Magazine · Cover story</span></div>
+      </a>
+      <a class="item" href="https://research.gatech.edu/aerospace-robotics-lab-simulates-moon-advance-nextgen-space-robotics-research" target="_blank" rel="noopener">
+        <div class="date">Feb 2026</div>
+        <div class="t">Aerospace Robotics Lab simulates the Moon to advance next-gen space robotics research
+          <span class="src">Georgia Tech Research News</span></div>
+      </a>
+      <a class="item" href="https://www.cbsnews.com/atlanta/news/georgia-tech-students-build-moon-like-lab-to-test-robots-for-future-missions/" target="_blank" rel="noopener">
+        <div class="date">2026</div>
+        <div class="t">Georgia Tech students build a moon-like lab to test robots for future missions
+          <span class="src">CBS News</span></div>
+      </a>
+      <a class="item" href="https://www.fox5atlanta.com/video/fmc-iouwzne4t4e104pw" target="_blank" rel="noopener">
+        <div class="date">2026</div>
+        <div class="t">Ga Tech's Lunar Lab brings the Moon to Georgia
+          <span class="src">FOX 5 Atlanta</span></div>
+      </a>
+      <a class="item" href="publications.html">
+        <div class="date">2026</div>
+        <div class="t">New papers on safety-critical control, Gaussian-splatting safety filters, and stochastic optimal control
+          <span class="src">See publications →</span></div>
+      </a>
+    </div>
+
+    <div class="subhead">2024</div>
+    <div class="news">
+      <a class="item" href="https://doi.org/10.1126/scirobotics.adh8332" target="_blank" rel="noopener">
+        <div class="date">2024</div>
+        <div class="t">EELS ice-world exploration work published in Science Robotics
+          <span class="src">Science Robotics</span></div>
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div>
+      <div class="lab">Aerospace Robotics Lab</div>
+      <div class="sub">Guggenheim School of Aerospace Engineering · Georgia Tech</div>
+      <div class="sub"><a href="https://www.youtube.com/@AerospaceRoboticsLab" target="_blank" rel="noopener">YouTube ↗</a></div>
+    </div>
+    <div class="right">© <span id="yr"></span> · ARL @ GT</div>
+  </div>
+</footer>
+<script>document.getElementById('yr').textContent=new Date().getFullYear();</script>
+</body>
+</html>

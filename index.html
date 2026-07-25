@@ -23,8 +23,8 @@
       <a href="publications.html">Publications</a>
       <a href="teaching.html">Teaching</a>
       <a href="blog.html">Blog</a>
+      <a href="news.html">News</a>
       <a href="contact.html">Contact</a>
-      <a href="https://aerospaceroboticslab.ae.gatech.edu/" target="_blank" rel="noopener">Lab Site ↗</a>
     </nav>
   </div>
 </header>
@@ -38,7 +38,8 @@
 
 <section class="hero">
   <div class="hero-grid"></div>
-  <div class="wrap">
+  <div class="wrap hero-inner">
+    <div class="hero-text">
     <span class="label">Space Systems · Autonomy · Robotics · Nonlinear Control</span>
     <h1>Robots that explore the<br><span class="accent">Moon, orbit, and beyond</span></h1>
     <p>We enable aerospace systems to operate autonomously — safely, intelligently, and collaboratively — in uncertain and extreme environments. Our work fuses rigorous mathematical foundations with hardware validation in the lab and the field.</p>
@@ -54,50 +55,24 @@
       <a href="https://www.youtube.com/@AerospaceRoboticsLab" target="_blank" rel="noopener">YouTube <span class="ext">↗</span></a>
       <a href="blog.html">Blog</a>
     </div>
-  </div>
-</section>
-
-<section>
-  <div class="wrap">
-    <div class="section-head">
-      <span class="label">Mission</span>
-      <h2>Intelligent decisions under uncertainty</h2>
-      <p>At the heart of our work is one question: how can robotic systems make intelligent decisions in the face of uncertainty, while ensuring safety, robustness, and mission success? We formulate and solve information-cost stochastic optimal control problems, drawing on nonlinear control, distributional robustness, convex optimization, and probability theory.</p>
+    </div>
+    <div class="hero-media">
+      <div class="video-embed">
+        <iframe id="heroPlayer" src="https://www.youtube.com/embed/_8owr_d2g5E"
+          title="Aerospace Robotics Lab — video" loading="lazy"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+      </div>
+      <div class="video-thumbs">
+        <button class="vthumb active" aria-label="Play video 1" onclick="setVid(this,'_8owr_d2g5E')"><img src="https://img.youtube.com/vi/_8owr_d2g5E/mqdefault.jpg" alt="Lab video 1" loading="lazy" /></button>
+        <button class="vthumb" aria-label="Play video 2" onclick="setVid(this,'p5xSoYaDb4k')"><img src="https://img.youtube.com/vi/p5xSoYaDb4k/mqdefault.jpg" alt="Lab video 2" loading="lazy" /></button>
+        <button class="vthumb" aria-label="Play video 3" onclick="setVid(this,'_x3aDHAftAU')"><img src="https://img.youtube.com/vi/_x3aDHAftAU/mqdefault.jpg" alt="Lab video 3" loading="lazy" /></button>
+        <button class="vthumb" aria-label="Play video 4" onclick="setVid(this,'jn5kYenYjmM')"><img src="https://img.youtube.com/vi/jn5kYenYjmM/mqdefault.jpg" alt="Lab video 4" loading="lazy" /></button>
+      </div>
+      <p style="margin:12px 0 0;color:var(--text-dim);font-size:13.5px;font-family:var(--mono);letter-spacing:.3px;">// More on the <a href="https://www.youtube.com/@AerospaceRoboticsLab" target="_blank" rel="noopener">lab channel ↗</a></p>
     </div>
   </div>
 </section>
-
-<section style="padding-top:0;">
-  <div class="wrap">
-    <div class="section-head">
-      <span class="label">Research thrusts</span>
-      <h2>Four directions, one frontier</h2>
-    </div>
-    <div class="grid grid-2">
-      <div class="card">
-        <span class="tag">Extreme Terrain</span>
-        <h3>Multi-Modal Robotic Systems</h3>
-        <p>We design and prototype multi-modal robots that traverse highly variable environments — planetary caves, ice crevasses, steep slopes. Inspired by platforms like EELS, they combine wheeled, legged, and slithering locomotion with onboard autonomy: dynamics modeling, real-time control adaptation, and perception-informed motion planning.</p>
-      </div>
-      <div class="card">
-        <span class="tag">Decision-Making</span>
-        <h3>Safe Exploration Under Uncertainty</h3>
-        <p>We develop scalable methods for perception-driven planning and control under bounded and unbounded uncertainty, using distributionally robust optimization, uncertainty quantification, and probabilistic inference.</p>
-      </div>
-      <div class="card">
-        <span class="tag">Multi-Agent</span>
-        <h3>Collaborative Autonomy</h3>
-        <p>We study how heterogeneous teams of robots — rovers, drones, and free-flyers — reason jointly, share information, and act cooperatively under resource, communication, and safety constraints: distributed task allocation, formation planning, and multi-agent motion planning with limited observability.</p>
-      </div>
-      <div class="card">
-        <span class="tag">In-Space · ISAM</span>
-        <h3>On-Orbit Inspection &amp; Assembly</h3>
-        <p>We enable autonomous in-space assembly and reconfiguration of large structures such as antennas and trusses — multi-spacecraft coordination, contact dynamics, and uncertainty-aware manipulation for next-generation orbital construction.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
 <section class="section-soft" style="border-top:1px solid var(--hairline);border-bottom:1px solid var(--hairline);">
   <div class="wrap">
     <div class="section-head">
@@ -213,6 +188,47 @@
 
 <section>
   <div class="wrap">
+    <div class="section-head">
+      <span class="label">Mission</span>
+      <h2>Intelligent decisions under uncertainty</h2>
+      <p>At the heart of our work is one question: how can robotic systems make intelligent decisions in the face of uncertainty, while ensuring safety, robustness, and mission success? We formulate and solve information-cost stochastic optimal control problems, drawing on nonlinear control, distributional robustness, convex optimization, and probability theory.</p>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0;">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="label">Research thrusts</span>
+      <h2>Four directions, one frontier</h2>
+    </div>
+    <div class="grid grid-2">
+      <div class="card">
+        <span class="tag">Extreme Terrain</span>
+        <h3>Multi-Modal Robotic Systems</h3>
+        <p>We design and prototype multi-modal robots that traverse highly variable environments — planetary caves, ice crevasses, steep slopes. Inspired by platforms like EELS, they combine wheeled, legged, and slithering locomotion with onboard autonomy: dynamics modeling, real-time control adaptation, and perception-informed motion planning.</p>
+      </div>
+      <div class="card">
+        <span class="tag">Decision-Making</span>
+        <h3>Safe Exploration Under Uncertainty</h3>
+        <p>We develop scalable methods for perception-driven planning and control under bounded and unbounded uncertainty, using distributionally robust optimization, uncertainty quantification, and probabilistic inference.</p>
+      </div>
+      <div class="card">
+        <span class="tag">Multi-Agent</span>
+        <h3>Collaborative Autonomy</h3>
+        <p>We study how heterogeneous teams of robots — rovers, drones, and free-flyers — reason jointly, share information, and act cooperatively under resource, communication, and safety constraints: distributed task allocation, formation planning, and multi-agent motion planning with limited observability.</p>
+      </div>
+      <div class="card">
+        <span class="tag">In-Space · ISAM</span>
+        <h3>On-Orbit Inspection &amp; Assembly</h3>
+        <p>We enable autonomous in-space assembly and reconfiguration of large structures such as antennas and trusses — multi-spacecraft coordination, contact dynamics, and uncertainty-aware manipulation for next-generation orbital construction.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
     <div class="card" style="padding:36px;">
       <div class="pi">
         <div class="frame">
@@ -235,11 +251,18 @@
     <div>
       <div class="lab">Aerospace Robotics Lab</div>
       <div class="sub">Guggenheim School of Aerospace Engineering · Georgia Tech</div>
-      <div class="sub"><a href="https://aerospaceroboticslab.ae.gatech.edu/" target="_blank" rel="noopener">aerospaceroboticslab.ae.gatech.edu ↗</a> · <a href="https://www.youtube.com/@AerospaceRoboticsLab" target="_blank" rel="noopener">YouTube ↗</a></div>
+      <div class="sub"><a href="https://www.youtube.com/@AerospaceRoboticsLab" target="_blank" rel="noopener">YouTube ↗</a></div>
     </div>
     <div class="right">© <span id="yr"></span> · ARL @ GT</div>
   </div>
 </footer>
-<script>document.getElementById('yr').textContent=new Date().getFullYear();</script>
+<script>
+  document.getElementById('yr').textContent=new Date().getFullYear();
+  function setVid(btn,id){
+    document.getElementById('heroPlayer').src='https://www.youtube.com/embed/'+id+'?autoplay=1';
+    document.querySelectorAll('.vthumb').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+  }
+</script>
 </body>
 </html>
