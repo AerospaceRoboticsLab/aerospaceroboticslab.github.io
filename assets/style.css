@@ -16,6 +16,7 @@
   --accent:      #2a2a30;
   --accent-dark: #3a3a42;
   --accent-tint: #f0f0f2;
+  --gold:        #2a2a30;
 
   --text:       #3f3f47;
   --text-dim:   #62626b;
@@ -65,8 +66,9 @@ img { max-width: 100%; display: block; }
 .brand .mark {
   position: relative; width: 42px; height: 42px; border-radius: 50%;
   display: grid; place-items: center; flex: 0 0 auto;
-  background: var(--accent); border: 1px solid var(--accent);
+  background: var(--ink); border: 1px solid var(--ink);
 }
+.brand .mark svg { display: block; }
 .brand .mark::before {
   content: ""; position: absolute; inset: -5px; border-radius: 50%;
   border: 1px solid var(--hairline-2);

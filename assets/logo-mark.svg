@@ -1,0 +1,12 @@
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="AstroX">
+  <g transform="translate(32,32)" fill="none" stroke="#1f1f24" stroke-width="3.4">
+    <ellipse rx="24" ry="9" transform="rotate(45)"/>
+    <ellipse rx="24" ry="9" transform="rotate(-45)"/>
+  </g>
+  <g transform="translate(32,32)">
+    <circle r="4.8" fill="#8a8a93"/>
+    <circle cx="17" cy="17" r="2.8" fill="#1f1f24"/>
+    <circle cx="17" cy="-17" r="2.4" fill="#1f1f24"/>
+    <circle cx="-17" cy="17" r="2.4" fill="#1f1f24"/>
+  </g>
+</svg>
