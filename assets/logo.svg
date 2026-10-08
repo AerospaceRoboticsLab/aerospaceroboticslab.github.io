@@ -1,7 +1,7 @@
 <svg width="560" height="132" viewBox="0 0 560 132" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" role="img" aria-label="AstroX — Aerospace Stochastic Robotics and Exploration — Nakka Lab, Georgia Tech">
   <defs>
-    <path id="tp" d="M12,100 A88,88 0 0 1 188,100"/>
-    <path id="bp" d="M188,100 A88,88 0 0 1 12,100"/>
+    <path id="tp" d="M15,100 A85,85 0 0 1 185,100"/>
+    <path id="bp" d="M185,100 A85,85 0 0 1 15,100"/>
     <path id="star" d="M0,-6 L1.6,-1.6 L6,0 L1.6,1.6 L0,6 L-1.6,1.6 L-6,0 L-1.6,-1.6 Z"/>
     <clipPath id="disc"><circle cx="100" cy="100" r="82"/></clipPath>
   </defs>
@@ -12,11 +12,11 @@
     <circle cx="100" cy="100" r="83" fill="none" stroke="#1f1f24" stroke-width="1"/>
     <circle cx="12" cy="100" r="2.6" fill="#8a8a93"/>
     <circle cx="188" cy="100" r="2.6" fill="#8a8a93"/>
-    <text font-family="SF Mono, Menlo, Consolas, monospace" font-size="10" font-weight="700" letter-spacing="2" fill="#1f1f24">
+    <text font-family="SF Mono, Menlo, Consolas, monospace" font-size="8.5" font-weight="700" letter-spacing="1.6" fill="#1f1f24">
       <textPath xlink:href="#tp" href="#tp" startOffset="50%" text-anchor="middle">ASTROX LAB · GEORGIA TECH</textPath>
     </text>
-    <text font-family="SF Mono, Menlo, Consolas, monospace" font-size="7.4" font-weight="700" letter-spacing="0.5" fill="#1f1f24">
-      <textPath xlink:href="#bp" href="#bp" startOffset="50%" text-anchor="middle">AEROSPACE STOCHASTIC ROBOTICS &amp; EXPLORATION</textPath>
+    <text font-family="SF Mono, Menlo, Consolas, monospace" font-size="7" font-weight="700" letter-spacing="0.2" fill="#1f1f24">
+      <textPath xlink:href="#bp" href="#bp" startOffset="50%" text-anchor="middle">AEROSPACE STOCHASTIC ROBOTICS AND EXPLORATION LAB</textPath>
     </text>
     <g clip-path="url(#disc)">
       <circle cx="100" cy="92" r="78" fill="#f7f7f8"/>
