@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>NOVA — Open-Source Planetary Rover — AstroX Lab</title>
+<meta name="description" content="NOVA is an open-source planetary rover developed at the AstroX Lab, Georgia Tech. CAD, bill of materials, and build resources." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&family=Roboto+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<link rel="icon" href="assets/logo-mark.svg" />
+<link rel="stylesheet" href="assets/style.css" />
+<style>
+  .nova-hero { display:grid; grid-template-columns: 1fr 1.1fr; gap:36px; align-items:center; }
+  @media (max-width: 900px) { .nova-hero { grid-template-columns:1fr; } }
+  .viewer { position:relative; aspect-ratio: 4/3; border-radius: var(--radius); border:1px solid var(--hairline); background: var(--paper-2); overflow:hidden; box-shadow: var(--shadow); }
+  .viewer canvas { display:block; width:100%; height:100%; }
+  .viewer .hint { position:absolute; left:12px; bottom:10px; font-family:var(--mono); font-size:11px; letter-spacing:1px; text-transform:uppercase; color:var(--text-faint); pointer-events:none; }
+  .viewer .empty { position:absolute; inset:0; display:grid; place-items:center; text-align:center; padding:28px; color:var(--text-dim); font-size:14.5px; }
+  .viewer .empty code { font-family:var(--mono); font-size:12.5px; background:var(--paper-3); padding:2px 6px; border-radius:6px; }
+  .viewer .tools { position:absolute; right:10px; top:10px; display:flex; gap:6px; }
+  .viewer .tools button { font-family:var(--sans); font-size:12px; font-weight:600; border:1px solid var(--hairline-2); background:var(--paper); color:var(--text-dim); padding:6px 10px; border-radius:8px; cursor:pointer; }
+  .viewer .tools button:hover { color:var(--ink); border-color:var(--ink); }
+  .specs { display:grid; grid-template-columns: repeat(2,1fr); gap:0 28px; margin:0; padding:0; list-style:none; }
+  .specs li { padding:10px 0; border-bottom:1px solid var(--hairline); font-size:14.5px; color:var(--text); }
+  .specs li b { display:block; font-family:var(--mono); font-size:10.5px; letter-spacing:1.5px; text-transform:uppercase; color:var(--text-faint); margin-bottom:2px; font-weight:600; }
+  @media (max-width:560px) { .specs { grid-template-columns:1fr; } }
+  .bom { width:100%; border-collapse:collapse; font-size:14.5px; }
+  .bom th, .bom td { text-align:left; padding:11px 10px; border-bottom:1px solid var(--hairline); vertical-align:top; }
+  .bom thead th { font-family:var(--mono); font-size:11px; letter-spacing:1.5px; text-transform:uppercase; color:var(--text-faint); font-weight:600; }
+  .bom tr.cat th { font-family:var(--mono); font-size:11.5px; letter-spacing:2px; text-transform:uppercase; color:var(--ink); background:var(--paper-2); padding-top:16px; }
+  .bom td.n { font-family:var(--mono); color:var(--text-faint); font-size:12.5px; width:36px; }
+  .bom td.q { font-family:var(--mono); width:48px; }
+  .bom a { font-weight:600; }
+  .steps { counter-reset: s; list-style:none; padding:0; margin:0; display:grid; gap:12px; }
+  .steps li { position:relative; padding:16px 18px 16px 58px; border:1px solid var(--hairline); border-radius:12px; background:var(--paper); font-size:15px; color:var(--text-dim); }
+  .steps li::before { counter-increment:s; content: counter(s, decimal-leading-zero); position:absolute; left:18px; top:16px; font-family:var(--mono); font-weight:700; color:var(--ink); }
+  .steps li b { color:var(--ink); display:block; margin-bottom:3px; }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap nav">
+    <a class="brand" href="index.html">
+      <span class="mark"><svg viewBox="-16 -16 32 32" width="26" height="26" fill="none" aria-hidden="true"><g stroke="#ffffff" stroke-width="2.4"><ellipse rx="13" ry="5" transform="rotate(45)"/><ellipse rx="13" ry="5" transform="rotate(-45)"/></g><circle r="2.8" fill="#ffffff"/></svg></span>
+      <span class="txt"><b>AstroX</b><span>Aerospace Stochastic Robotics &amp; Exploration</span></span>
+    </a>
+    <button class="nav-toggle" aria-label="Menu" onclick="document.getElementById('nav').classList.toggle('open')">☰</button>
+    <nav class="nav-links" id="nav">
+      <a href="index.html">Home</a>
+      <a href="research.html">Research</a>
+      <a href="nova.html" class="active">NOVA</a>
+      <a href="team.html">Team</a>
+      <a href="publications.html">Publications</a>
+      <a href="teaching.html">Teaching</a>
+      <a href="blog.html">Blog</a>
+      <a href="news.html">News</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero" style="padding:56px 0 54px;">
+  <div class="hero-grid"></div>
+  <div class="wrap nova-hero">
+    <div>
+      <span class="label">Open-source hardware</span>
+      <h1 style="font-size:clamp(32px,5vw,54px);line-height:1.04;margin:14px 0 16px;letter-spacing:-1.6px;color:var(--ink);">NOVA<br><span class="accent" style="color:var(--text-dim);">an open planetary rover</span></h1>
+      <p style="font-size:clamp(16px,2vw,19px);color:var(--text-dim);margin:0 0 22px;">NOVA is a four-wheel, independently steered research rover designed and built in the AstroX Lab for testing planetary autonomy on our lunar-analog testbed. Everything needed to build one — CAD, bill of materials, and build notes — is released here so other labs and student teams can rebuild, modify, and extend it.</p>
+      <div class="btn-row">
+        <a class="btn btn-primary" href="#bom">Bill of materials</a>
+        <a class="btn btn-ghost" href="#cad">Download CAD</a>
+      </div>
+      <ul class="specs" style="margin-top:26px;">
+        <li><b>Mobility</b>4 × swerve modules (independent drive + steer)</li>
+        <li><b>Suspension</b>Differential-bar (rocker) chassis</li>
+        <li><b>Drive</b>100:1 metal gearmotors, 37D</li>
+        <li><b>Steering</b>Dynamixel XL430-W250-T</li>
+        <li><b>Compute</b>NVIDIA Jetson Orin Nano + Raspberry Pi Pico 2W</li>
+        <li><b>Sensing</b>ZED 2i stereo camera, BNO055 IMU</li>
+        <li><b>Power</b>3S 11.1 V 10 Ah LiPo, Matek PDB</li>
+        <li><b>Structure</b>3D-printed PLA, 6061 Al plate, 15 mm Al tube</li>
+      </ul>
+    </div>
+    <div>
+      <div class="viewer" id="viewer">
+        <div class="tools"><button id="btnReset" type="button">Reset view</button><button id="btnSpin" type="button">Auto-rotate</button></div>
+        <div class="empty" id="viewerEmpty"><div><img src="robots/nova2/nova_render.png" alt="NOVA rover" style="max-height:70%;margin:0 auto 10px;opacity:.9;" /><span style="font-size:13px;color:var(--text-faint);font-family:var(--mono);letter-spacing:1px;text-transform:uppercase;">Loading 3D model…</span></div></div>
+        <div class="hint">Drag to orbit · Scroll to zoom</div>
+      </div>
+      <p style="margin:12px 0 0;color:var(--text-dim);font-size:13.5px;font-family:var(--mono);letter-spacing:.3px;">// NOVA V2 assembly · rendered in-browser</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <span class="label">Build guide</span>
+      <h2>Rebuild it in four steps</h2>
+    </div>
+    <ol class="steps">
+      <li><b>Order the parts.</b> The bill of materials below lists every purchased component with a supplier link. Most items ship from Amazon, DigiKey, Robotis, and Stereolabs.</li>
+      <li><b>Print and machine.</b> Chassis tubs, lids, battery case, Jetson housing, ZED mounts, and swerve-module parts are 3D-printed in PLA; the screw-plate templates and bracket are cut from 6061 aluminum plate. Install the M2.5–M5 heat-set inserts before assembly.</li>
+      <li><b>Assemble.</b> Open <code>NOVA_V2_Assembly.SLDASM</code> (from the <a href="https://github.com/AstroX-OpenRover/NOVA2" target="_blank" rel="noopener">GitHub repo ↗</a>) in SolidWorks for the full exploded structure: four swerve modules, the differential bar, and the chassis sub-assemblies.</li>
+      <li><b>Wire and flash.</b> The Pico 2W drives the Cytron motor drivers and reads the IMU; the Jetson Orin Nano runs perception on the ZED 2i and talks to the Dynamixels through the U2D2 hub. Software release coming soon.</li>
+    </ol>
+  </div>
+</section>
+
+<section class="section-soft" id="bom" style="border-top:1px solid var(--hairline);border-bottom:1px solid var(--hairline);">
+  <div class="wrap">
+    <div class="section-head" style="display:flex;justify-content:space-between;align-items:end;max-width:none;gap:20px;flex-wrap:wrap;">
+      <div><span class="label">Bill of materials</span><h2>Every purchased part</h2></div>
+      <a class="btn btn-ghost" href="https://github.com/AstroX-OpenRover/NOVA2" target="_blank" rel="noopener" style="padding:10px 18px;font-size:14px;">BOM.xlsx on GitHub ↗</a>
+    </div>
+    <div style="overflow-x:auto;">
+    <table class="bom">
+      <thead><tr><th>#</th><th>Item</th><th>Qty</th><th>Supplier</th></tr></thead>
+      <tbody>
+      <tr class="cat"><th colspan="4">Motors &amp; Motor Components</th></tr>
+      <tr><td class="n">1</td><td>Cytron Dual Channel 10A DC Motor Driver MDD10A</td><td class="q">4</td><td><a href="https://www.amazon.com/dp/B07CW34YRB" target="_blank" rel="noopener">Amazon ↗</a></td></tr>
+      <tr><td class="n">2</td><td>100:1 Metal Gearmotor 37Dx73</td><td class="q">4</td><td><a href="https://www.pololu.com/product/4755" target="_blank" rel="noopener">DigiKey ↗</a></td></tr>
+      <tr><td class="n">3</td><td>Dynamixel XL430-W250-T</td><td class="q">4</td><td><a href="https://robotis.us/products/dynamixel-xl430-w250-t?srsltid=AfmBOop2Oz8GJb3F9JeEbGDvo4p2EbUcEhEpoxwmSZNvzSobO2hXIets&amp;dxl1=XL430-W250-T&amp;dxl2=XM430-W210-R" target="_blank" rel="noopener">Robotis ↗</a></td></tr>
+      <tr><td class="n">4</td><td>U2D2 Power Hub Board Set</td><td class="q">1</td><td><a href="https://robotis.us/products/u2d2-power-hub-board-set?srsltid=AfmBOoqWGAm4pLL8Gl7szL8HYLOwEBam3Hs3er-c6Tm_Ajtfy6L1DA_H" target="_blank" rel="noopener">Robotis ↗</a></td></tr>
+      <tr><td class="n">5</td><td>Robotis U2D2</td><td class="q">1</td><td><a href="https://robotis.us/products/u2d2?srsltid=AfmBOoow_en2klbSUUnYc34i1jKPr8RH0KdBCxgZWMjuniZalcbTsCK0" target="_blank" rel="noopener">Robotis ↗</a></td></tr>
+      <tr class="cat"><th colspan="4">Electrical Hardware</th></tr>
+      <tr><td class="n">6</td><td>Jetson Orin Nano Developer Kit</td><td class="q">1</td><td><a href="https://www.amazon.com/dp/B0GDCX7WZW" target="_blank" rel="noopener">Amazon ↗</a></td></tr>
+      <tr><td class="n">7</td><td>Zed 2i Stereo Camera</td><td class="q">1</td><td><a href="https://www.stereolabs.com/store/products/zed-2i" target="_blank" rel="noopener">StereoLabs ↗</a></td></tr>
+      <tr><td class="n">8</td><td>Matek PDB Hex 12S 5A 12V</td><td class="q">1</td><td><a href="https://www.amazon.com/dp/B0F131SLD6" target="_blank" rel="noopener">Amazon ↗</a></td></tr>
+      <tr><td class="n">9</td><td>3S 11.1V 10,000mAh 20C LiPo (12.6V max) (2-pack)</td><td class="q">1</td><td><a href="https://www.amazon.com/dp/B0B58CX2V8" target="_blank" rel="noopener">Amazon ↗</a></td></tr>
+      <tr><td class="n">10</td><td>Raspberry Pi Pico 2W</td><td class="q">1</td><td><a href="https://www.amazon.com/dp/B0DRJXPPWL" target="_blank" rel="noopener">Amazon ↗</a></td></tr>
+      <tr><td class="n">11</td><td>Breadboard 5.5x8.2x0.85cm</td><td class="q">1</td><td><a href="https://www.amazon.com/dp/B0135IQ0ZC" target="_blank" rel="noopener">Amazon ↗</a></td></tr>
+      <tr><td class="n">12</td><td>12 Pin Connector Size 20 Contacts</td><td class="q">1</td><td><a href="https://www.amazon.com/dp/B0B1ZLYJ17" target="_blank" rel="noopener">Amazon ↗</a></td></tr>
+      <tr><td class="n">13</td><td>BNO055 IMU</td><td class="q">1</td><td><a href="https://www.amazon.com/dp/B0GVK81HXR" target="_blank" rel="noopener">Amazon ↗</a></td></tr>
+      <tr><td class="n">14</td><td>4 Pcs 50mm Black Square Plastic Cooling Fan Filter Cover</td><td class="q">1</td><td><a href="https://www.amazon.com/dp/B0DF7QH5HC" target="_blank" rel="noopener">Amazon ↗</a></td></tr>
+      <tr><td class="n">15</td><td>Rocker Switch</td><td class="q">1</td><td><a href="https://www.amazon.com/dp/B0FGH8TYY9" target="_blank" rel="noopener">Amazon ↗</a></td></tr>
+      <tr><td class="n">16</td><td>WINSINN 50mm Fan 12V, 3D Printer Micro 12 Volt Fans (5 pcs)</td><td class="q">1</td><td><a href="https://www.amazon.com/dp/B07GX8L4K8" target="_blank" rel="noopener">Amazon ↗</a></td></tr>
+      <tr class="cat"><th colspan="4">Connector Cables</th></tr>
+      <tr><td class="n">17</td><td>6-inch USBA to USBC 3A Cable (5-pack)</td><td class="q">1</td><td><a href="https://www.amazon.com/dp/B08LL1SVZD" target="_blank" rel="noopener">Amazon ↗</a></td></tr>
+      <tr><td class="n">18</td><td>1ft Micro-USB to USB</td><td class="q">1</td><td><a href="https://www.amazon.com/dp/B095JZSHXQ" target="_blank" rel="noopener">Amazon ↗</a></td></tr>
+      <tr><td class="n">19</td><td>3 Pairs EC5 5.0mm Male and Female Banana Connector Pigtails</td><td class="q">1</td><td><a href="https://www.amazon.com/dp/B0BLLL4FFS" target="_blank" rel="noopener">Amazon ↗</a></td></tr>
+      <tr><td class="n">20</td><td>90 Degree Right Angle DC Power Male Plug Jack to Bare Wire Pigtail Cord</td><td class="q">1</td><td><a href="https://www.amazon.com/dp/B0851CV1Y6" target="_blank" rel="noopener">Amazon ↗</a></td></tr>
+      <tr class="cat"><th colspan="4">Mechanical Hardware</th></tr>
+      <tr><td class="n">21</td><td>16mmx28mmx7mm Bearing</td><td class="q">1</td><td><a href="https://www.amazon.com/dp/B082PSB5Q6" target="_blank" rel="noopener">Amazon ↗</a></td></tr>
+      <tr><td class="n">22</td><td>3mmx8mmx4mm Bearing</td><td class="q">1</td><td><a href="https://www.amazon.com/dp/B07FVYPMPX" target="_blank" rel="noopener">Amazon ↗</a></td></tr>
+      <tr><td class="n">23</td><td>65x85x10mm Bearing</td><td class="q">4</td><td><a href="https://www.amazon.com/dp/B0FSSDDD5R" target="_blank" rel="noopener">Amazon ↗</a></td></tr>
+      <tr><td class="n">24</td><td>30mmx42mmx7mm Bearing</td><td class="q">1</td><td><a href="https://www.amazon.com/dp/B0DCK8YZY4" target="_blank" rel="noopener">Amazon ↗</a></td></tr>
+      <tr><td class="n">25</td><td>2GT Timing Belt Closed Loop Rubber Belts 220-2GT-9</td><td class="q">2</td><td><a href="https://www.amazon.com/dp/B0CMSVNMGN" target="_blank" rel="noopener">Amazon ↗</a></td></tr>
+      <tr><td class="n">26</td><td>GT2 Timing Belt Pulley 20 Teeth - 6mm shaft</td><td class="q">1</td><td><a href="https://www.amazon.com/dp/B0GWLM6FD6" target="_blank" rel="noopener">Amazon ↗</a></td></tr>
+      <tr><td class="n">27</td><td>GT2 Timing Belt Pulley 20 Teeth - 8mm shaft</td><td class="q">1</td><td><a href="https://www.amazon.com/dp/B077GMKW1C" target="_blank" rel="noopener">Amazon ↗</a></td></tr>
+      <tr><td class="n">28</td><td>METALLIXITY Square Aluminum Tube (15mm x 15mm x 2mm x 300mm) 2Pcs</td><td class="q">2</td><td><a href="https://www.amazon.com/dp/B0B4W5WTBW" target="_blank" rel="noopener">Amazon ↗</a></td></tr>
+      <tr><td class="n">29</td><td>10PCS RC Toy Pushrod Connector Double End Threaded Rod Stainless Steel Rod Linkage</td><td class="q">1</td><td><a href="https://www.amazon.com/dp/B0DWSGJXDK" target="_blank" rel="noopener">Amazon ↗</a></td></tr>
+      <tr><td class="n">30</td><td>10Pcs ShareGoo M4 Ball Joint</td><td class="q">1</td><td><a href="https://www.amazon.com/dp/B09JLMVS6T" target="_blank" rel="noopener">Amazon ↗</a></td></tr>
+      <tr><td class="n">31</td><td>1Pcs 16mm x 300mm (0.63 x 11.81 inches) Vigorous Linear Motion Rod</td><td class="q">1</td><td><a href="https://www.amazon.com/dp/B0BZQC6K92" target="_blank" rel="noopener">Amazon ↗</a></td></tr>
+      <tr><td class="n">32</td><td>2Pcs 8mmx100mm (0.315x3.94 inches) Vigorous Linear Motion Rod</td><td class="q">1</td><td><a href="https://www.amazon.com/dp/B0BZQB2S9S" target="_blank" rel="noopener">Amazon ↗</a></td></tr>
+      <tr><td class="n">33</td><td>6061 Aluminum Sheet Metal 8 x 12 x 1/4 Inch</td><td class="q">1</td><td><a href="https://www.amazon.com/dp/B0BF18VVQ4" target="_blank" rel="noopener">Amazon ↗</a></td></tr>
+      <tr><td class="n">34</td><td>8mm Flange Coupler</td><td class="q">2</td><td><a href="https://www.amazon.com/dp/B08335MYGW" target="_blank" rel="noopener">Amazon ↗</a></td></tr>
+      <tr class="cat"><th colspan="4">Wires &amp; Misc.</th></tr>
+      <tr><td class="n">35</td><td>20 AWG Solid Core Wire Bundle</td><td class="q">1</td><td><a href="https://www.amazon.com/dp/B084DM42JS" target="_blank" rel="noopener">Amazon ↗</a></td></tr>
+      <tr><td class="n">36</td><td>20 AWG Stranded Wire Bundle</td><td class="q">1</td><td><a href="https://www.amazon.com/dp/B07G2GLKMP" target="_blank" rel="noopener">Amazon ↗</a></td></tr>
+      <tr><td class="n">37</td><td>120pcs Multicolored Dupont Wire</td><td class="q">1</td><td><a href="https://www.amazon.com/dp/B0BRTJXND9" target="_blank" rel="noopener">Amazon ↗</a></td></tr>
+      <tr><td class="n">38</td><td>840PCS Electrical Wire Connectors, Insulated Wire Crimp Terminals</td><td class="q">1</td><td><a href="https://www.amazon.com/dp/B07S33YTKY" target="_blank" rel="noopener">Amazon ↗</a></td></tr>
+      <tr><td class="n">39</td><td>Wire Crimps and Crimping Tool</td><td class="q">1</td><td><a href="https://www.amazon.com/dp/B08BLJLNYP" target="_blank" rel="noopener">Amazon ↗</a></td></tr>
+      <tr><td class="n">40</td><td>M2.5 Heat Set Inserts</td><td class="q">1</td><td><a href="https://www.amazon.com/dp/B0CS6YVJYD" target="_blank" rel="noopener">Amazon ↗</a></td></tr>
+      <tr><td class="n">41</td><td>M3 Heat Set Inserts</td><td class="q">1</td><td><a href="https://www.amazon.com/dp/B0CS6VZYL8" target="_blank" rel="noopener">Amazon ↗</a></td></tr>
+      <tr><td class="n">42</td><td>M4 Heat Set Inserts</td><td class="q">1</td><td><a href="https://www.amazon.com/dp/B0CS6XGMFD" target="_blank" rel="noopener">Amazon ↗</a></td></tr>
+      <tr><td class="n">43</td><td>M5 Heat Set Inserts</td><td class="q">1</td><td><a href="https://www.amazon.com/dp/B0CS6WFCGZ" target="_blank" rel="noopener">Amazon ↗</a></td></tr>
+      <tr><td class="n">44</td><td>Wire Grommet Kit</td><td class="q">1</td><td><a href="https://www.amazon.com/dp/B094XY2GVR" target="_blank" rel="noopener">Amazon ↗</a></td></tr>
+      <tr><td class="n">45</td><td>Metric Bolt Kit</td><td class="q">1</td><td><a href="https://www.amazon.com/dp/B0FGX9JGC5" target="_blank" rel="noopener">Amazon ↗</a></td></tr>
+      <tr><td class="n">46</td><td>M2.5 Bolt Kit</td><td class="q">1</td><td><a href="https://www.amazon.com/dp/B0FJ1YMG3J" target="_blank" rel="noopener">Amazon ↗</a></td></tr>
+      <tr><td class="n">47</td><td>Elegoo PLA Black Filament</td><td class="q">1</td><td><a href="https://www.amazon.com/dp/B0BV24T11D" target="_blank" rel="noopener">Amazon ↗</a></td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+</section>
+
+<section id="cad">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="label">CAD &amp; source files</span>
+      <h2>Everything lives on GitHub</h2>
+      <p>The full SolidWorks assembly (13 sub-assemblies, 56 parts), STEP exports for vendor components, the bill of materials, and future software releases are maintained in the NOVA2 repository.</p>
+    </div>
+    <div class="grid grid-3">
+      <a class="card" href="https://github.com/AstroX-OpenRover/NOVA2" target="_blank" rel="noopener">
+        <span class="tag">Repository</span>
+        <h3>AstroX-OpenRover / NOVA2 ↗</h3>
+        <p>Clone or download the whole project as a zip. Issues and pull requests welcome.</p>
+      </a>
+      <a class="card" href="https://github.com/AstroX-OpenRover/NOVA2" target="_blank" rel="noopener">
+        <span class="tag">CAD</span>
+        <h3>SolidWorks &amp; STEP ↗</h3>
+        <p>Open <code>NOVA_V2_Assembly.SLDASM</code> for the complete rover; STEP files cover the ZED 2i, XL-430, couplers, and heat-set inserts.</p>
+      </a>
+      <a class="card" href="https://github.com/AstroX-OpenRover/NOVA2" target="_blank" rel="noopener">
+        <span class="tag">Bill of materials</span>
+        <h3>BOM.xlsx ↗</h3>
+        <p>Spreadsheet version of the table above with supplier links, ready for ordering.</p>
+      </a>
+    </div>
+    <p style="margin-top:22px;color:var(--text-dim);font-size:14px;">License: NOVA hardware files are released for research and educational use. If you build or modify NOVA, we'd love to hear about it — <a href="contact.html">get in touch</a>.</p>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div>
+      <div class="lab">AstroX — Aerospace Stochastic Robotics and Exploration Lab</div>
+      <div class="sub">Nakka Lab · Guggenheim School of Aerospace Engineering · Georgia Tech</div>
+      <div class="sub"><a href="https://www.youtube.com/@AerospaceRoboticsLab" target="_blank" rel="noopener">YouTube ↗</a></div>
+    </div>
+    <div class="right">© <span id="yr"></span> · AstroX @ GT</div>
+  </div>
+</footer>
+<script>document.getElementById('yr').textContent=new Date().getFullYear();</script>
+
+<script type="importmap">
+{ "imports": { "three": "https://unpkg.com/three@0.160.0/build/three.module.js", "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/" } }
+</script>
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+
+const box = document.getElementById('viewer');
+const empty = document.getElementById('viewerEmpty');
+const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+box.insertBefore(renderer.domElement, box.firstChild);
+
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(38, 4/3, 0.01, 1000);
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true; controls.autoRotate = false; controls.autoRotateSpeed = 1.2;
+
+scene.add(new THREE.HemisphereLight(0xffffff, 0xd8d8dd, 1.1));
+const key = new THREE.DirectionalLight(0xffffff, 1.4); key.position.set(3, 5, 4); scene.add(key);
+const fill = new THREE.DirectionalLight(0xffffff, 0.5); fill.position.set(-4, 2, -3); scene.add(fill);
+
+const grid = new THREE.GridHelper(10, 20, 0xd8d8dd, 0xececef); scene.add(grid);
+
+let homePos, homeTarget;
+function frame(obj){
+  const b = new THREE.Box3().setFromObject(obj);
+  const size = b.getSize(new THREE.Vector3()), c = b.getCenter(new THREE.Vector3());
+  obj.position.sub(c); obj.position.y += size.y/2; // sit on grid
+  const r = Math.max(size.x,size.y,size.z);
+  grid.scale.setScalar(r/4);
+  camera.near = r/100; camera.far = r*50; camera.updateProjectionMatrix();
+  camera.position.set(r*1.2, r*0.8, r*1.4); controls.target.set(0, size.y/2, 0);
+  homePos = camera.position.clone(); homeTarget = controls.target.clone();
+  controls.update();
+}
+const mat = new THREE.MeshStandardMaterial({ color: 0x8b8e97, metalness: 0.25, roughness: 0.55 });
+const pmrem = new THREE.PMREMGenerator(renderer);
+scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
+new GLTFLoader().load('robots/nova2/NOVA_Assembly_web.glb', g => {
+  g.scene.traverse(o => { if (o.isMesh) { o.geometry.computeVertexNormals(); o.material.envMapIntensity = 0.9; if (o.material.roughness < 0.35) o.material.roughness = 0.35; } });
+  scene.add(g.scene); frame(g.scene); empty.remove();
+}, undefined, err => { empty.innerHTML = '<div>3D model could not be loaded.</div>'; console.error(err); });
+
+function resize(){ const w = box.clientWidth, h = box.clientHeight; renderer.setSize(w, h, false); camera.aspect = w/h; camera.updateProjectionMatrix(); }
+new ResizeObserver(resize).observe(box); resize();
+document.getElementById('btnReset').onclick = () => { if(homePos){ camera.position.copy(homePos); controls.target.copy(homeTarget); } };
+document.getElementById('btnSpin').onclick = e => { controls.autoRotate = !controls.autoRotate; e.target.textContent = controls.autoRotate ? 'Stop rotation' : 'Auto-rotate'; };
+(function loop(){ requestAnimationFrame(loop); controls.update(); renderer.render(scene, camera); })();
+</script>
+</body>
+</html>

@@ -12,10 +12,10 @@
     <circle cx="100" cy="100" r="83" fill="none" stroke="#1f1f24" stroke-width="1"/>
     <circle cx="12" cy="100" r="2.6" fill="#8a8a93"/>
     <circle cx="188" cy="100" r="2.6" fill="#8a8a93"/>
-    <text font-family="SF Mono, Menlo, Consolas, monospace" font-size="8.5" font-weight="700" letter-spacing="1.6" fill="#1f1f24">
+    <text font-family="Roboto Mono, SF Mono, Menlo, Consolas, monospace" font-size="8.5" font-weight="700" letter-spacing="1.6" fill="#6b6f78">
       <textPath xlink:href="#tp" href="#tp" startOffset="50%" text-anchor="middle">ASTROX LAB · GEORGIA TECH</textPath>
     </text>
-    <text font-family="SF Mono, Menlo, Consolas, monospace" font-size="7" font-weight="700" letter-spacing="0.2" fill="#1f1f24">
+    <text font-family="Roboto Mono, SF Mono, Menlo, Consolas, monospace" font-size="7" font-weight="700" letter-spacing="0.2" fill="#6b6f78">
       <textPath xlink:href="#bp" href="#bp" startOffset="50%" text-anchor="middle">AEROSPACE STOCHASTIC ROBOTICS AND EXPLORATION LAB</textPath>
     </text>
     <g clip-path="url(#disc)">
@@ -52,6 +52,6 @@
   </g>
 
   <!-- wordmark -->
-  <text x="148" y="68" font-family="Helvetica, Arial, sans-serif" font-size="50" font-weight="800" letter-spacing="-1.5" fill="#1f1f24">Astro<tspan fill="#8a8a93">X</tspan></text>
-  <text x="150" y="92" font-family="SF Mono, Menlo, Consolas, monospace" font-size="11" letter-spacing="2.4" fill="#62626b">NAKKA LAB · GEORGIA TECH</text>
+  <text x="148" y="68" font-family="Roboto, Helvetica, Arial, sans-serif" font-size="50" font-weight="800" letter-spacing="-1.5" fill="#1f1f24">Astro<tspan fill="#8a8a93">X</tspan></text>
+  <text x="150" y="92" font-family="Roboto Mono, SF Mono, Menlo, Consolas, monospace" font-size="11" letter-spacing="2.4" fill="#62626b">NAKKA LAB · GEORGIA TECH</text>
 </svg>
