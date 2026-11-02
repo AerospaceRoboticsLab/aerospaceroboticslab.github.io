@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>socx — GPU-Accelerated Chance-Constrained Stochastic Optimal Control — AstroX Lab</title>
+<meta name="description" content="socx is a GPU-accelerated JAX solver for lifted convex reformulations of linear stochastic optimal control under chance constraints, from the AstroX Lab at Georgia Tech." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&family=Roboto+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<link rel="icon" href="../assets/logo-mark.svg" />
+<link rel="stylesheet" href="../assets/style.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" />
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body)"></script>
+<style>
+  code { font-family:var(--mono); font-size:.92em; }
+  .paper-hero { display:grid; grid-template-columns: 1.1fr 1fr; gap:36px; align-items:center; }
+  @media (max-width: 900px) { .paper-hero { grid-template-columns:1fr; } }
+  .paper-hero > * { min-width:0; }
+  .authors { margin:0 0 4px; font-size:16.5px; font-weight:600; color:var(--ink); }
+  .authors a { color:var(--ink); }
+  .hero p.affil { margin:0 0 18px; font-family:var(--mono); font-size:12.5px; letter-spacing:.3px; color:var(--text-faint); }
+  .specs { display:grid; grid-template-columns: repeat(2,1fr); gap:0 28px; margin:26px 0 0; padding:0; list-style:none; }
+  .specs li { padding:10px 0; border-bottom:1px solid var(--hairline); font-size:14.5px; color:var(--text); }
+  .specs li b { display:block; font-family:var(--mono); font-size:10.5px; letter-spacing:1.5px; text-transform:uppercase; color:var(--text-faint); margin-bottom:2px; font-weight:600; }
+  @media (max-width:560px) { .specs { grid-template-columns:1fr; } }
+  .prose { max-width:760px; }
+  .prose p { font-size:16.5px; color:var(--text-dim); margin:0 0 16px; }
+  .katex-display { position:relative; overflow-x:auto; overflow-y:hidden; padding:4px 0; }
+  .fig { margin:0; background:#fff; border:1px solid var(--hairline); border-radius:var(--radius); padding:18px; }
+  .fig img { width:100%; height:auto; }
+  .fig figcaption { margin-top:12px; color:var(--text-dim); font-size:14px; }
+  .fig-wide { max-width:760px; margin:0 auto; }
+  .traj { display:grid; grid-template-columns: 1.17fr 1fr 1fr; gap:14px; align-items:end; }
+  @media (max-width:720px) { .traj { grid-template-columns:1fr; } }
+  .traj > div { min-width:0; font-size:13px; color:var(--text-dim); text-align:center; }
+  .traj-legend { max-width:760px; margin:14px auto 0; }
+  .table-wrap { position:relative; overflow-x:auto; }
+  .data { width:100%; border-collapse:collapse; font-size:14.5px; white-space:nowrap; }
+  .data th, .data td { text-align:right; padding:10px; border-bottom:1px solid var(--hairline); }
+  .data th:first-child, .data td:first-child { text-align:left; }
+  .data thead th { font-family:var(--mono); font-size:11px; letter-spacing:1px; color:var(--text-faint); font-weight:600; }
+  .data thead tr:first-child th { text-align:center; text-transform:uppercase; color:var(--ink); letter-spacing:1.5px; }
+  .data tr.cat th { text-align:left; font-family:var(--mono); font-size:11.5px; letter-spacing:1.5px; text-transform:uppercase; color:var(--ink); background:var(--paper-2); }
+  .data td.na { text-align:center; color:var(--text-faint); }
+  .data .ours { font-weight:700; color:var(--ink); }
+  .note { margin:14px 0 0; color:var(--text-dim); font-size:14px; max-width:760px; }
+  .bib { margin:0; padding:18px; overflow-x:auto; background:var(--paper-2); border:1px solid var(--hairline); border-radius:12px; font-family:var(--mono); font-size:13px; color:var(--text); }
+  .map { position:relative; overflow:hidden; }
+  .hot { position:absolute; border-radius:6px; cursor:pointer; transition:box-shadow .15s ease; }
+  .hot.on { outline:2px solid var(--ink); box-shadow:0 0 0 3000px rgba(255,255,255,.78); }
+  .steps .card { padding:18px 20px; cursor:pointer; }
+  .steps .card .tag { margin-bottom:8px; }
+  .steps .card h3 { font-size:17px; margin-bottom:6px; }
+  .steps .card p { font-size:14px; }
+  .steps .card.on { transform:translateY(-4px); border-color:var(--ink); box-shadow:var(--shadow); }
+  .steps .card:focus-visible { outline:2px solid var(--ink); outline-offset:2px; }
+  @media (min-height:600px) { .method-fig { position:sticky; top:84px; z-index:2; } }
+  @media (prefers-reduced-motion: reduce) { .hot { transition:none; } .steps .card, .steps .card:hover, .steps .card.on { transform:none; transition:none; } }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap nav">
+    <a class="brand" href="../index.html">
+      <span class="mark"><svg viewBox="-16 -16 32 32" width="26" height="26" fill="none" aria-hidden="true"><g stroke="#ffffff" stroke-width="2.4"><ellipse rx="13" ry="5" transform="rotate(45)"/><ellipse rx="13" ry="5" transform="rotate(-45)"/></g><circle r="2.8" fill="#ffffff"/></svg></span>
+      <span class="txt"><b>AstroX</b><span>Aerospace Stochastic Robotics &amp; Exploration</span></span>
+    </a>
+    <button class="nav-toggle" aria-label="Menu" onclick="document.getElementById('nav').classList.toggle('open')">☰</button>
+    <nav class="nav-links" id="nav">
+      <a href="../index.html">Home</a>
+      <a href="../research.html" class="active">Research</a>
+      <a href="../nova.html">NOVA</a>
+      <a href="../team.html">Team</a>
+      <a href="../publications.html">Publications</a>
+      <a href="../teaching.html">Teaching</a>
+      <a href="../blog.html">Blog</a>
+      <a href="../news.html">News</a>
+      <a href="../contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero" style="padding:56px 0 54px;">
+  <div class="hero-grid"></div>
+  <div class="wrap paper-hero">
+    <div>
+      <span class="label">Preprint · arXiv 2026</span>
+      <h1 style="font-size:clamp(32px,5vw,54px);line-height:1.04;margin:14px 0 16px;letter-spacing:-1.6px;"><span style="font-family:var(--mono);letter-spacing:-2px;">socx</span><br><span class="accent" style="font-size:.56em;letter-spacing:-.8px;display:block;line-height:1.14;margin-top:8px;">GPU-accelerated chance-constrained stochastic optimal control using JAX</span></h1>
+      <p class="authors"><a href="../team.html">Tanmay Dokania</a> and <a href="../team.html">Yashwanth Kumar Nakka</a></p>
+      <p class="affil">Daniel Guggenheim School of Aerospace Engineering · Georgia Tech</p>
+      <div class="btn-row">
+        <a class="btn btn-primary" href="https://arxiv.org/abs/2610.40427" target="_blank" rel="noopener">arXiv ↗</a>
+        <a class="btn btn-ghost" href="https://arxiv.org/pdf/2610.40427" target="_blank" rel="noopener">PDF ↗</a>
+        <a class="btn btn-ghost" href="#cite">Cite</a>
+      </div>
+      <ul class="specs">
+        <li><b>vs. MOSEK</b>Up to 98× faster</li>
+        <li><b>vs. SCS + cuDSS</b>Up to 2224× faster</li>
+        <li><b>Longest horizon</b>\(N=1120\) in 145 s on average</li>
+        <li><b>MOSEK limit</b>Out of memory at \(N=320\)</li>
+      </ul>
+    </div>
+    <figure class="fig">
+      <img src="socx/traj_helix.svg" alt="A quadrotor's mean trajectory and Monte Carlo samples passing through a tapering 3D corridor, with position uncertainty ellipses along the path and a terminal covariance bound at the goal." />
+      <figcaption>A helix through a tapering corridor, one of the three quadrotor setups solved with <code>socx</code>.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <span class="label">Abstract</span>
+    </div>
+    <div class="prose">
+      <p>In this article, we present <code>socx</code>, a GPU-accelerated solver for lifted convex reformulations of linear stochastic optimal control under chance constraints, implemented in JAX. We demonstrate that by exploiting the sparse and independent structure of the problem, distributed optimization can reduce it to simpler problems: independent linear-quadratic tracking (LQT) problems and Euclidean projections onto sets. These simpler problems can be solved in parallel and then coupled using the constraints. To validate our solver, we run it on a hover-linearized 3D quadrotor and show a speed-up of up to 98× over MOSEK and up to 2224× over SCS. <code>socx</code> also solves horizons up to \(N=1120\), whereas MOSEK runs out of memory at \(N=320\). We present ablations to isolate the key components that enable the speed-up.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section-soft" style="border-top:1px solid var(--hairline);border-bottom:1px solid var(--hairline);">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="label">The problem</span>
+      <h2>Planning a distribution over paths</h2>
+    </div>
+    <div class="prose">
+      <p>Under uncertainty, a planner has to find a distribution over paths whose probability of failure is bounded, rather than a single path. We consider a discrete-time linear system driven by Gaussian noise, with chance constraints on the state and control and a bound on the terminal covariance:</p>
+      \[ \mathbf{x}_{k+1} = A_k \mathbf{x}_k + B_k \mathbf{u}_k + D_k \mathbf{w}_k, \qquad \mathbf{w}_k \sim \mathcal{N}(0, I_{n_w}) \]
+      \[ \Pr\big(a_{i,k}^\top \mathbf{x}_k \le b_{i,k}\big) \ge 1 - \epsilon_{x,i,k}, \qquad \mathrm{Var}(\mathbf{x}_N) \preceq \Sigma_f \]
+      <p>Writing the state and control in a growing basis of the initial state and past noise gives a deterministic convex problem, an exact reformulation for these constraints established in our earlier work (<a href="https://arxiv.org/abs/2603.19454" target="_blank" rel="noopener">arXiv ↗</a>, <a href="https://ieeexplore.ieee.org/document/11554308" target="_blank" rel="noopener">IEEE ↗</a>). Each linear chance constraint becomes a second-order cone:</p>
+      \[ \mathbf{x}_k = \mu_k + \Psi_k \mathbf{e}^{(k)}, \qquad \mathbf{u}_k = \nu_k + V_k \mathbf{e}^{(k)}, \qquad a_{i,k}^\top \mu_k + \zeta_{x,i,k} \big\| \Psi_k^\top a_{i,k} \big\|_2 \le b_{i,k} \]
+      <p>The cost is size: the basis has \(n_e(k) = n_x + k\,n_w\) elements, so the number of variables grows as \(O(N^2 n_w (n_u + n_x))\). Generic conic solvers become prohibitively expensive as the horizon grows.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <span class="label">Method</span>
+      <h2>Split along the problem's structure</h2>
+      <p>Dynamics and cost separate across the mean and each stochastic column; only the constraints couple them. <code>socx</code> uses ADMM with a variable split that turns each iteration into small subproblems solved in parallel, with no Jacobians, KKT matrices, or dense constraint operators.</p>
+    </div>
+    <div id="method">
+      <figure class="fig method-fig" style="margin-bottom:18px;">
+        <div class="map">
+          <img src="socx/pipeline.png" width="2080" height="600" alt="Flow diagram of one ADMM iteration: the theta-update solves one mean and many stochastic LQT problems with cached gains, the z-update projects onto second-order cones and the spectral-norm ball in parallel, then the u-update and a stopping test either return the solution or loop back." />
+          <!-- ponytail: regions are percentages of pipeline.png; re-measure them if the figure is re-cropped -->
+          <span class="hot" aria-hidden="true" data-step="theta" style="left:.65%;top:18.89%;width:40.9%;height:73.66%;"></span>
+          <span class="hot" aria-hidden="true" data-step="z" style="left:44.4%;top:1.73%;width:37.9%;height:90.81%;"></span>
+          <span class="hot" aria-hidden="true" data-step="u" style="left:82.45%;top:19.06%;width:15.35%;height:61.53%;"></span>
+        </div>
+        <figcaption>One ADMM iteration. Hover or tap a block or card to connect them.</figcaption>
+      </figure>
+      <div class="grid grid-3 steps">
+        <div class="card" tabindex="0" data-step="theta">
+          <span class="tag">θ-update</span>
+          <h3>Independent LQT solves</h3>
+          <p>One mean and \(n_e(N)\) stochastic tracking problems run in parallel with \(O(\log N)\) span. The stochastic columns share one set of cached gains.</p>
+        </div>
+        <div class="card" tabindex="0" data-step="z">
+          <span class="tag">z-update</span>
+          <h3>Parallel projections</h3>
+          <p>Chance constraints project onto cones in closed form. The terminal covariance uses a small \(n_x \times n_x\) Gram eigendecomposition.</p>
+        </div>
+        <div class="card" tabindex="0" data-step="u">
+          <span class="tag">u-update · Stop</span>
+          <h3>Dual update and stop test</h3>
+          <p>The dual accumulates the remaining constraint residual. The solver stops when the primal and dual tests pass, and otherwise loops back to the θ-update.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-soft" style="border-top:1px solid var(--hairline);border-bottom:1px solid var(--hairline);">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="label">Results</span>
+      <h2>A hover-linearized 3D quadrotor</h2>
+      <p>The system has \(n_x=12\), \(n_u=4\), and \(n_w=6\), with random wrench perturbations and \(\Delta t = 0.1\) s. Each setup has position chance constraints (\(\epsilon_x = 0.05\)), actuator limits (\(\epsilon_u = 0.05\)), and a terminal position covariance bound of \(\Sigma_f = (0.12\,\mathrm{m})^2 I_3\).</p>
+    </div>
+    <figure class="fig">
+      <div class="traj">
+        <div><img src="socx/traj_helix.svg" alt="Helix trajectory through a tapering corridor." />Helix through a tapering corridor</div>
+        <div><img src="socx/traj_zigzag.svg" alt="Zig-zag climbing trajectory through a room." />Zig-zag climb through a room</div>
+        <div><img src="socx/traj_outback.svg" alt="Out-and-back trajectory through a room." />Out and back through a room</div>
+      </div>
+      <img class="traj-legend" src="socx/traj_legend.svg" alt="Legend: mean trajectory, Monte Carlo samples, two-sigma position ellipse, keep-in boundary, infeasible region, start, goal, soft waypoints, and terminal covariance bound." />
+      <figcaption>Trajectories computed with <code>socx</code> at \(N=80\).</figcaption>
+    </figure>
+
+    <div class="subhead">Solve time at tolerance 10⁻⁵</div>
+    <div class="table-wrap">
+      <table class="data">
+        <thead>
+          <tr><th colspan="2"></th><th colspan="4">socx (ours), GPU</th><th colspan="2">MOSEK, CPU</th><th colspan="2">SCS + cuDSS, GPU</th></tr>
+          <tr><th>\(N\)</th><th>\(n_e(N)\)</th><th>Time (s)</th><th>Iterations</th><th>Obj. err.</th><th>\(P_\mathrm{viol}/\epsilon\)</th><th>Time (s)</th><th>Speed-up</th><th>Time (s)</th><th>Speed-up</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>40</td><td>252</td><td class="ours">0.38 ± 0.02</td><td>377 ± 20</td><td>2×10<sup>−7</sup></td><td>1.000</td><td>2.9 ± 0.1</td><td>7.2–7.9×</td><td>26 ± 11</td><td>47–104×</td></tr>
+          <tr><td>80</td><td>492</td><td class="ours">0.66 ± 0.06</td><td>483 ± 53</td><td>10<sup>−7</sup></td><td>1.000</td><td>14.9 ± 1.5</td><td>20–27×</td><td>179 ± 79</td><td>145–369×</td></tr>
+          <tr><td>160</td><td>972</td><td class="ours">2.20 ± 0.38</td><td>750 ± 135</td><td>2×10<sup>−5</sup></td><td>1.002</td><td>91.7 ± 5.5</td><td>37–53×</td><td>1976 ± 2077</td><td>199–<b>2224</b>×</td></tr>
+          <tr><td>240</td><td>1,452</td><td class="ours">4.33 ± 0.30</td><td>798 ± 57</td><td>10<sup>−4</sup></td><td>1.002</td><td>311.7 ± 82.9</td><td>57–<b>98</b>×</td><td>3848 ± 2123</td><td>386–1342×</td></tr>
+          <tr><td>320</td><td>1,932</td><td class="ours">7.10 ± 0.26</td><td>808 ± 31</td><td>–</td><td>1.000</td><td class="na" colspan="2">out of memory (50 GB cap)</td><td>5789 ± 1633</td><td>576–1085×</td></tr>
+          <tr><td>1120</td><td>6,732</td><td class="ours">144.54 ± 55.48</td><td>1364 ± 523</td><td>–</td><td>–</td><td class="na" colspan="2">out of memory (50 GB cap)</td><td class="na" colspan="2">time out (10,000 s cap)</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">Values are the mean ± maximum deviation over the three setups. \(P_\mathrm{viol}/\epsilon\) is the probability of violation divided by the allowed violation: a value near 1 means the constraints are active, and a value above 1 quantifies the violation. Runs used an Intel Core Ultra 9 285K (64 GB RAM) and an RTX 5080 (16 GB VRAM). Baseline times are the solvers' internal solve times through CVXPY, and <code>socx</code> times exclude JAX's just-in-time compilation.</p>
+
+    <div class="subhead">Tolerance and horizon</div>
+    <figure class="fig fig-wide">
+      <img src="socx/solve_time.svg" alt="Two log-scale plots of solve time for socx, MOSEK, and SCS plus cuDSS: (a) against tolerance at N equals 160, and (b) against horizon at tolerance ten to the minus five. socx is fastest throughout." />
+      <figcaption>Solve time vs. (a) tolerance at \(N=160\) and (b) horizon at tolerance \(10^{-5}\).</figcaption>
+    </figure>
+    <p class="note" style="margin-left:auto;margin-right:auto;">As a first-order method, <code>socx</code> slows at tighter tolerances, while MOSEK, an interior-point method, varies little. At \(N=160\), the speed-up over MOSEK falls from 37–53× at \(10^{-5}\) to 12–14× at \(10^{-7}\).</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <span class="label">Ablations</span>
+      <h2>Where the speed-up comes from</h2>
+      <p>On the helix setup at tolerance \(10^{-5}\), we swap out each key component. The parallel LQT update is faster than every alternative, though sequential and condensed updates use less memory. Sharing gains matters most: without it, the update is 6.9–14.8× slower and uses 4.8–9.7× more memory.</p>
+    </div>
+    <div class="table-wrap">
+      <table class="data">
+        <thead>
+          <tr><th></th><th colspan="3">Time (ms)</th><th colspan="3">Scratch memory (MB)</th></tr>
+          <tr><th>Variant</th><th>\(N=80\)</th><th>\(N=160\)</th><th>\(N=320\)</th><th>\(N=80\)</th><th>\(N=160\)</th><th>\(N=320\)</th></tr>
+        </thead>
+        <tbody>
+          <tr class="cat"><th colspan="7">θ-update, per iteration</th></tr>
+          <tr class="ours"><td>Parallel LQT (ours)</td><td>1.13</td><td>2.62</td><td>8.17</td><td>39</td><td>124</td><td>390</td></tr>
+          <tr><td>Sequential LQT</td><td>4.48</td><td>9.16</td><td>20.66</td><td>8</td><td>40</td><td>159</td></tr>
+          <tr><td>Condensed KKT</td><td>2.46</td><td>9.54</td><td>61.19</td><td>10</td><td>13</td><td>43</td></tr>
+          <tr><td>Per-column loop</td><td>7.78</td><td>30.63</td><td>120.72</td><td>188</td><td>747</td><td>3768</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="table-wrap" style="margin-top:22px;">
+      <table class="data">
+        <thead>
+          <tr><th></th><th colspan="3">Time (ms)</th><th></th></tr>
+          <tr><th>Variant</th><th>\(N=80\)</th><th>\(N=160\)</th><th>\(N=320\)</th><th>Complexity</th></tr>
+        </thead>
+        <tbody>
+          <tr class="cat"><th colspan="5">Terminal-LMI projection, per call</th></tr>
+          <tr class="ours"><td>Gram eigendecomposition (ours)</td><td>0.39</td><td>0.42</td><td>0.41</td><td>\(O(n_x^2 W + n_x^3)\)</td></tr>
+          <tr><td>SVD</td><td>0.94</td><td>1.05</td><td>0.98</td><td>\(O(n_x^2 W)\)</td></tr>
+          <tr><td>Schur-complement PSD</td><td>8.79</td><td>22.03</td><td>88.64</td><td>\(O((n_x + W)^3)\)</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">Here \(W = n_e(N)\).</p>
+  </div>
+</section>
+
+<section id="cite" style="padding-top:0;">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="label">Cite</span>
+      <h2>BibTeX</h2>
+    </div>
+    <pre class="bib">@misc{dokania2026socx,
+  title         = {socx: GPU-Accelerated Chance-Constrained Stochastic Optimal Control using JAX},
+  author        = {Dokania, Tanmay and Nakka, Yashwanth Kumar},
+  year          = {2026},
+  eprint        = {2610.40427},
+  archivePrefix = {arXiv},
+  primaryClass  = {eess.SY}
+}</pre>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div>
+      <div class="lab">AstroX — Aerospace Stochastic Robotics and Exploration Lab</div>
+      <div class="sub">Nakka Lab · Guggenheim School of Aerospace Engineering · Georgia Tech</div>
+      <div class="sub"><a href="https://www.youtube.com/@AerospaceRoboticsLab" target="_blank" rel="noopener">YouTube ↗</a></div>
+    </div>
+    <div class="right">© <span id="yr"></span> · AstroX @ GT</div>
+  </div>
+</footer>
+<script>
+  document.getElementById('yr').textContent=new Date().getFullYear();
+  const method=document.getElementById('method');
+  const show=step=>method.querySelectorAll('[data-step]').forEach(e=>e.classList.toggle('on',e.dataset.step===step));
+  const stepOf=e=>e.target.closest('#method [data-step]')?.dataset.step;
+  method.addEventListener('pointerover',e=>{ if(e.pointerType==='mouse') show(stepOf(e)); });
+  method.addEventListener('pointerleave',e=>{ if(e.pointerType==='mouse') show(); });
+  method.addEventListener('focusin',e=>show(stepOf(e)));
+  method.addEventListener('focusout',()=>show());
+  document.addEventListener('click',e=>show(stepOf(e))); // touch: a tap selects its step until the next tap
+</script>
+</body>
+</html>
