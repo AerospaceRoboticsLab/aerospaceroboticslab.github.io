@@ -74,6 +74,12 @@
         <p>We developed generalized polynomial chaos-based sequential convex programming (gPC-SCP) to compute suboptimal solutions for continuous-time chance-constrained stochastic nonlinear optimal control problems, enabling motion planning under uncertainty. The method first derives a deterministic surrogate with convex constraints via gPC expansion and a distributionally robust convex subset of the chance constraints, then solves it using sequential convex programming for trajectory generation and control.</p>
       </div>
 
+      <a class="card" href="papers/socx.html" style="grid-column:1 / -1;">
+        <span class="tag">Stochastic Optimal Control · GPU</span>
+        <h3>socx — GPU-Accelerated Chance-Constrained Stochastic Optimal Control →</h3>
+        <p>A JAX solver for lifted convex reformulations of linear stochastic optimal control under chance constraints. Distributed optimization reduces the problem to independent linear-quadratic tracking problems and Euclidean projections that run in parallel, giving speed-ups of up to 98× over MOSEK on a hover-linearized 3D quadrotor and horizons up to N = 1120.</p>
+      </a>
+
     </div>
   </div>
 </section>
